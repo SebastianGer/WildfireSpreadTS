@@ -1,0 +1,40 @@
+command:
+  - ${env}
+  - python
+  - ${program}
+  - -c
+  - cfgs/convlstm/full_run.yaml
+  - --trainer
+  - cfgs/trainer_single_gpu.yaml
+  - --data
+  - cfgs/data_multitemporal_full_features.yaml
+  - --trainer.default_root_dir
+  - ${envvar:LOG_DIR}
+  - --data.data_dir
+  - ${envvar:DATA_DIR}
+  - ${args}
+method: grid
+metric:
+  goal: maximize
+  name: val_f1.max
+parameters:
+  optimizer.lr:
+    values:
+      - 0.1
+      - 0.01
+      - 0.001
+      - 0.0001
+      - 1e-05
+  model.init_args.loss_function:
+    values:
+      - BCE
+      - Focal
+      - Dice
+      - Jaccard
+  model.init_args.num_layers:
+    value: 1
+  trainer.max_epochs: 
+    value: 20
+  do_test:
+    value: False
+program: src/train.py

@@ -1,0 +1,42 @@
+command:
+  - ${env}
+  - python
+  - ${program}
+  - -c
+  - cfgs/UTAE/reduced_features.yaml
+  - --trainer
+  - cfgs/trainer_single_gpu.yaml
+  - --data
+  - cfgs/data_multitemporal_reduced_features.yaml
+  - --trainer.default_root_dir
+  - ${envvar:LOG_DIR}
+  - --data.data_dir
+  - ${envvar:DATA_DIR}
+  - ${args}
+method: grid
+metric:
+  goal: maximize
+  name: val_f1.max
+parameters:
+  data.num_workers:
+    value: 8
+  data.return_doy:
+    value: True
+  model.init_args.pos_class_weight:
+    values:
+      - 3
+      - 5
+      - 10
+      - 20
+      - 50
+      - 100
+  optimizer.lr:
+    values:
+      - 0.01
+      - 0.001
+      - 0.0001
+  trainer.max_epochs: 
+    value: 50
+  do_test:
+    value: False
+program: src/train.py

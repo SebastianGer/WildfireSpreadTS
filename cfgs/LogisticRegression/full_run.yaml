@@ -1,0 +1,18 @@
+# pytorch_lightning==2.0.1
+seed_everything: 0
+optimizer: 
+  class_path: torch.optim.AdamW
+  init_args:
+    lr: 0.1
+
+model:
+  class_path: LogisticRegression
+  init_args:
+    n_channels: 40
+    flatten_temporal_dimension: true
+    pos_class_weight: 236 # (relative frequency in augmented 2018 and 2020 fires)^-1
+    loss_function: "Dice"
+  
+do_train: true
+do_test: true
+do_predict: false

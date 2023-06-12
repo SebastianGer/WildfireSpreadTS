@@ -1,0 +1,34 @@
+command:
+  - ${env}
+  - python
+  - ${program}
+  - -c
+  - cfgs/unet/res18_multitemporal.yaml
+  - --trainer
+  - cfgs/trainer_single_gpu.yaml
+  - --data
+  - cfgs/data_multitemporal_full_features.yaml
+  - --trainer.default_root_dir
+  - ${envvar:LOG_DIR}
+  - --data.data_dir
+  - ${envvar:DATA_DIR}
+  - ${args}
+method: grid
+metric:
+  goal: minimize
+  name: val_loss
+parameters:
+  model.init_args.pos_class_weight:
+    values:
+    - 1
+    - 3
+    - 5
+    - 10
+    - 50
+    - 100
+    - 236 # (relative frequency in augmented 2018 and 2020 fires)^-1
+  trainer.max_epochs: 
+    value: 50
+  do_test:
+    value: False
+program: src/train.py

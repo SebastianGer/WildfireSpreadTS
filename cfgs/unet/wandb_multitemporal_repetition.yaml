@@ -1,0 +1,36 @@
+command:
+  - ${env}
+  - python
+  - ${program}
+  - -c
+  - cfgs/unet/res18_multitemporal.yaml
+  - --trainer
+  - cfgs/trainer_single_gpu.yaml
+  - --data
+  - cfgs/data_multitemporal_full_features.yaml
+  - --trainer.default_root_dir
+  - ${envvar:LOG_DIR}
+  - --data.data_dir
+  - ${envvar:DATA_DIR}
+  - ${args}
+method: grid
+metric:
+  goal: maximize
+  name: val_f1.max
+parameters:
+  seed_everything:
+    values:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+  trainer.max_epochs: 
+    value: 200
+  do_test:
+    value: True
+  data.remove_duplicate_features:
+    value: True
+  data.num_workers:
+    value: 4
+program: src/train.py

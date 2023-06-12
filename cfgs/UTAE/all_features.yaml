@@ -1,0 +1,17 @@
+# pytorch_lightning==2.0.1
+# Contains best parameters determined in grid search
+seed_everything: 0
+optimizer: 
+  class_path: torch.optim.AdamW
+  init_args:
+    lr: 0.01
+model:
+  class_path: UTAELightning
+  init_args:
+    n_channels: 40
+    flatten_temporal_dimension: false
+    pos_class_weight: 10
+    loss_function: "BCE"
+do_train: true
+do_test: true
+do_predict: false

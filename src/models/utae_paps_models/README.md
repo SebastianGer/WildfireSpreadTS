@@ -1,6 +1,10 @@
+The code in this directory is copied from [https://github.com/VSainteuf/utae-paps](https://github.com/VSainteuf/utae-paps), licensed under the MIT license by VSainteuf as follows. 
+
+
+
 MIT License
 
-Copyright (c) 2023 Sebastian Gerard
+Copyright (c) 2021 VSainteuf
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
