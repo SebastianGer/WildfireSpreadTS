@@ -1,5 +1,5 @@
 from .BaseModel import BaseModel
-from .BinarizeAFMap import BinarizeAFMap
+from .PersistenceModel import PersistenceModel
 from .ConvLSTMLightning import ConvLSTMLightning
 from .LogisticRegression import LogisticRegression
 from .SMPModel import SMPModel

@@ -62,23 +62,25 @@ trainer:
   reload_dataloaders_every_n_epochs: 0
   default_root_dir: ./lightning_logs
 model:
-  class_path: BinarizeAFMap
+  class_path: PersistenceModel
   init_args:
     n_channels: 1
     flatten_temporal_dimension: true
     pos_class_weight: 236 # (relative frequency in augmented 2018 and 2020 fires)^-1
     loss_function: "Jaccard"
+    use_all_detections: True # Change this to False to use only the last detection of each day
 
 data:
-  data_dir: DATA_DIR_PATH
+  data_dir: YOUR_DATA_DIR
   batch_size: 64
   n_leading_observations: 1
   crop_side_length: 128
   load_from_hdf5: true
   num_workers: 4
   remove_duplicate_features: false
-  features_to_keep: [-1]
-do_train: true
+  add_binary_fire_mask: true
+  features_to_keep: [-2,-1] # non-binary and binary fire mask
+do_train: false
 do_test: true
 do_predict: false
 do_validate: true
