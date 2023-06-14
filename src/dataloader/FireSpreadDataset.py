@@ -377,7 +377,8 @@ class FireSpreadDataset(Dataset):
     @staticmethod
     def img_dates_to_doys(img_dates):
         """
-        Converts a list of date strings to day of year values.
+        Converts a list of date strings to day of year values. The replacement of ".tif" is a left-over from 
+        a previous version where the HDF5 dataset still contained this postfix in the date strings.
         :param img_dates: list of datetime objects
         :return: list of day of year values
         """
@@ -435,7 +436,7 @@ class FireSpreadDataset(Dataset):
                 x = np.stack(imgs, axis=0)
 
                 # Get dates from filenames
-                img_dates = [img_path.split("/")[-1].split("_")[0]
+                img_dates = [img_path.split("/")[-1].split("_")[0].replace(".tif", "")
                              for img_path in img_files]
 
                 # Active fire masks have nans where no detections occur. In general, we want to replace NaNs with
