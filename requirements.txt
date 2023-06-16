@@ -1,7 +1,7 @@
-python=3.10.4
-h5py=3.7.0
-numpy=1.22.3
-pandas=1.4.2
+#python==3.10.4
+h5py==3.7.0
+numpy==1.22.3
+pandas==1.4.2
 einops==0.6.1
 torch==2.0.0
 torchmetrics==0.11.4
@@ -18,3 +18,4 @@ pytorch-lightning==2.0.1
 opencv-python==4.7.0.72
 scikit-learn==1.2.2
 segmentation-models-pytorch==0.3.2
+jsonargparse[signatures]==4.20.1
