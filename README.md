@@ -27,9 +27,9 @@ Grid searches and repetitions of experiments were done via WandB sweeps. Those a
 For example, to train the U-net architecture on one day of observations, which is specified in `cfgs/unet/wandb_monotemporal_repetition.yaml`, we could simply copy and paste the WandB parameters to the command line:
 
 ```
-python train.py --data.data_dir YOUR_DATA_DIR --config=cfgs/unet/res18_monotemporal.yaml --trainer=cfgs/trainer_single_gpu.yaml --data=cfgs/data_monotemporal_full_features.yaml --seed_everything=0 --trainer.max_epochs=200 --do_test=True
+python3 train.py --config=cfgs/unet/res18_monotemporal.yaml --trainer=cfgs/trainer_single_gpu.yaml --data=cfgs/data_monotemporal_full_features.yaml --seed_everything=0 --trainer.max_epochs=200 --do_test=True --data.data_dir YOUR_DATA_DIR
 ```
-where you replace `YOUR_DATA_DIR` with the path to your local HDF5 dataset. 
+where you replace `YOUR_DATA_DIR` with the path to your local HDF5 dataset. Alternatively, you can permanently set the data directory in the respective data config files. Later arguments overwrite previously given arguments, including parameters defined in config files. 
 
 ## Re-creating the dataset
 
