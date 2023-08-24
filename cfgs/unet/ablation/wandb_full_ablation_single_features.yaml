@@ -1,0 +1,56 @@
+command:
+  - ${env}
+  - python
+  - ${program}
+  - -c
+  - cfgs/unet/res18_monotemporal.yaml
+  - --trainer
+  - cfgs/trainer_single_gpu.yaml
+  - --data
+  - cfgs/data_monotemporal_full_features.yaml
+  - --trainer.default_root_dir
+  - ${envvar:LOG_DIR}
+  - --data.data_dir
+  - ${envvar:DATA_DIR}
+  - ${args}
+method: grid
+metric:
+  goal: maximize
+  name: test_AP
+parameters:
+  # Chosen to have each year as the test set once
+  data.data_fold_id:
+    values:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+  data.features_to_keep:
+    values:
+      - [12, 13, 14, 38, 39] # Topography
+      - [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 38, 39] # Landcover, one-hot encoded
+      - [10, 15, 38, 39] # ERC, drought index
+      - [5, 6, 7, 8, 9, 11, 38, 39] # Current weather
+      - [33, 34, 35, 36, 37, 38, 39] # weather forecast
+  data.n_leading_observations:
+    values:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+  data.remove_duplicate_features:
+    value: true
+  trainer.max_steps: 
+    value: 10000
+  do_test:
+    value: True
+program: src/train.py

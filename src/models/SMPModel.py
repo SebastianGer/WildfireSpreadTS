@@ -6,6 +6,8 @@ from .BaseModel import BaseModel
 
 
 class SMPModel(BaseModel):
+    """_summary_ Segmentation model based on the SMP package. We only use the U-Net model. 
+    """
     def __init__(
         self,
         encoder_name: str,

@@ -8,10 +8,6 @@ command:
   - cfgs/trainer_single_gpu.yaml
   - --data
   - cfgs/data_monotemporal_full_features.yaml
-  - --trainer.default_root_dir
-  - ${envvar:LOG_DIR}
-  - --data.data_dir
-  - ${envvar:DATA_DIR}
   - ${args}
 method: grid
 metric:

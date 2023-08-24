@@ -22,7 +22,7 @@ class LogisticRegression(BaseModel):
             **kwargs
         )
 
-        # Logistic Regression just consists of a single convolutional layer with a kernel size of 3
+        # Logistic Regression implemented as a single convolutional layer with a kernel size of 3
         self.model = nn.Conv2d(
             in_channels=n_channels, out_channels=1, kernel_size=3, padding=1
         )

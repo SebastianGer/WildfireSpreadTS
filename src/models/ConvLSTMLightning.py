@@ -7,8 +7,8 @@ from .utae_paps_models.convlstm import ConvLSTM, ConvLSTM_Seg
 
 
 class ConvLSTM_Seg_multi_layers(ConvLSTM_Seg):
-    # Adds the option to choose the number of layers,
-    # which ConvLSTM_Seg does not offer.
+    """_summary_ ConvLSTM class where the number of layers can be set. 
+    """
     def __init__(
         self,
         num_classes,
@@ -53,7 +53,7 @@ class ConvLSTMLightning(BaseModel):
             n_channels=n_channels,
             flatten_temporal_dimension=flatten_temporal_dimension,
             pos_class_weight=pos_class_weight,
-            required_img_size=img_height_width,
+            required_img_size=img_height_width, # Important: ConvLSTM requires a fixed input size.
             *args,
             **kwargs
         )

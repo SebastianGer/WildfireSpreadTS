@@ -7,6 +7,8 @@ from .utae_paps_models.utae import UTAE
 
 
 class UTAELightning(BaseModel):
+    """_summary_ U-Net architecture with temporal attention in the bottleneck and skip connections.
+    """
     def __init__(
         self,
         n_channels: int,
@@ -19,7 +21,7 @@ class UTAELightning(BaseModel):
             n_channels=n_channels,
             flatten_temporal_dimension=flatten_temporal_dimension,
             pos_class_weight=pos_class_weight,
-            use_doy=True,
+            use_doy=True, # UTAE uses the day of the year as an input feature
             *args,
             **kwargs
         )

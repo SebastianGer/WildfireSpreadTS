@@ -3,7 +3,7 @@ batch_size: 64
 n_leading_observations: 1
 crop_side_length: 128
 load_from_hdf5: true
-num_workers: 4
+num_workers: 8
 remove_duplicate_features: false
 features_to_keep: null
-add_binary_fire_mask: true
+n_leading_observations_test_adjustment: 5

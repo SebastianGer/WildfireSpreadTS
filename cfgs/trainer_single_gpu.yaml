@@ -9,12 +9,12 @@ logger:
     # Determined via argument linking in train.py
     # save_dir: ${fit.trainer.default_root_dir}
     project: wildfire_progression
-    log_model: false
+    log_model: true
 callbacks: 
   - class_path: pytorch_lightning.callbacks.model_checkpoint.ModelCheckpoint
     init_args:
-      monitor: val_f1
-      mode: max
+      monitor: val_loss
+      mode: min
 fast_dev_run: false
 max_epochs: 500
 min_epochs: -1

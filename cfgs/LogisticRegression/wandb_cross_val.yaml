@@ -1,0 +1,42 @@
+command:
+  - ${env}
+  - python
+  - ${program}
+  - -c
+  - cfgs/LogisticRegression/full_run.yaml
+  - --trainer
+  - cfgs/trainer_single_gpu.yaml
+  - --data
+  - cfgs/data_monotemporal_full_features.yaml
+  - ${args}
+method: grid
+metric:
+  goal: maximize
+  name: test_AP
+parameters:
+  data.data_fold_id:
+    values:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+  data.features_to_keep:
+    values:
+      - [0, 1, 2, 3, 4, 38, 39] # Vegetation
+      - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 38, 39] # Vegetation, Topography, Land cover, Weather
+      - None  # All features
+  data.n_leading_observations:
+    value: 1
+  trainer.max_steps: 
+    value: 520 # 5 epochs
+  do_test:
+    value: True
+program: src/train.py
