@@ -8,13 +8,13 @@ This repository contains the code corresponding to the paper with the name above
 
 ## Preparing the dataset
 
-The dataset is freely available on Zenodo (link will be added upon acceptance of the paper). After downloading it, it should be converted to HDF5 files. Be aware that they take up about twice as much space as the original dataset! At the same time, they allow for much faster access, without which training is not feasible. 
+The dataset is freely available at [https://doi.org/10.5281/zenodo.8006177](https://doi.org/10.5281/zenodo.8006177) under CC-BY-4.0. For training, you will need to convert them to HDF5 files, which take up twice as much space but allow for much faster training.
 
-To convert the dataset, run:
+To convert the dataset to HDF5, run:
 ```python3 src/preprocess/CreateHDF5Dataset.py --data_dir YOUR_DATA_DIR --target_dir YOUR_TARGET_DIR```
  substituting the path to your local dataset and where you want the HDF5 version of the dataset to be created. 
 
-You can skip this step, and simply pass `--data.load_from_hdf5=False` on the command line, but be aware that you won't be able to perform training at any reasonable speed. 
+If you want to skip this step, and simply pass `--data.load_from_hdf5=False` on the command line, but be aware that you won't be able to perform training at any reasonable speed. 
 
 ## Re-running the baseline experiments
 
