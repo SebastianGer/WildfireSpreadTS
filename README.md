@@ -2,6 +2,8 @@
 
 This repository contains the code corresponding to the paper with the name above. 
 
+**Note that after publishing the paper, we discovered a bug in the dataset class.** Based on initial experiments, the corrected dataset class leads to slightly higher performance, but the trends in the results are basically the same as those reported in the paper. The bug was fixed in commit `ab3c8f35c5ec8c52c306a4488eaeb71a5a13d0de`, in case you want to roll-back the change to compare with the results in the paper.
+
 ## Setup the environment
 
 ``` pip3 install -r requirements.txt ```
