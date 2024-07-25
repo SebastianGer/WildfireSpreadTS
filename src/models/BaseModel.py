@@ -7,6 +7,7 @@ import torch
 import torch.nn as nn
 import torchmetrics
 import wandb
+import matplotlib.pyplot as plt
 from segmentation_models_pytorch.losses import (DiceLoss, JaccardLoss,
                                                 LovaszLoss)
 from torchvision.ops import sigmoid_focal_loss
@@ -258,7 +259,8 @@ class BaseModel(pl.LightningModule, ABC):
         wandb.log({"Test confusion matrix": wandb_table})
 
         fig, ax = self.test_pr_curve.plot(score=True)
-        wandb.log({"Test PR Curve": fig})
+        wandb.log({"Test PR Curve": wandb.Image(fig)})
+        plt.close()
 
     def predict_step(self, batch, batch_idx, dataloader_idx=0):
         x, y = batch
