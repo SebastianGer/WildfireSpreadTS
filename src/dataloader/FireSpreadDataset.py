@@ -105,13 +105,14 @@ class FireSpreadDataset(Dataset):
         found_fire_year = None
         found_fire_name = None
         for fire_year in self.datapoints_per_fire:
-            for fire_name, datapoints_in_fire in self.datapoints_per_fire[fire_year].items():
-                if target_id - first_id_in_current_fire < datapoints_in_fire:
-                    found_fire_year = fire_year
-                    found_fire_name = fire_name
-                    break
-                else:
-                    first_id_in_current_fire += datapoints_in_fire
+            if found_fire_year is None:
+                for fire_name, datapoints_in_fire in self.datapoints_per_fire[fire_year].items():
+                    if target_id - first_id_in_current_fire < datapoints_in_fire:
+                        found_fire_year = fire_year
+                        found_fire_name = fire_name
+                        break
+                    else:
+                        first_id_in_current_fire += datapoints_in_fire
 
         in_fire_index = target_id - first_id_in_current_fire
 
