@@ -546,35 +546,67 @@ class FireSpreadDataset(Dataset):
         return [datetime.strptime(img_date.replace(".tif", ""), date_format).timetuple().tm_yday for img_date in img_dates]
 
     @staticmethod
-    def map_channel_index_to_features():
+    def map_channel_index_to_features(only_base:bool = False):
         """_summary_ Maps the channel index to the feature name.
 
         Returns:
             _type_: _description_
         """
-        return {0: 'VIIRS band M11',
-                1: 'VIIRS band I2',
-                2: 'VIIRS band I1',
-                3: 'NDVI',
-                4: 'EVI2',
-                5: 'total precipitation',
-                6: 'wind speed',
-                7: 'wind direction',
-                8: 'minimum temperature',
-                9: 'maximum temperature',
-                10: 'energy release component',
-                11: 'specific humidity',
-                12: 'slope',
-                13: 'aspect',
-                14: 'elevation',
-                15: 'pdsi',
-                16: 'Landcover_Type1',
-                17: 'forecast total_precipitation',
-                18: 'forecast wind speed',
-                19: 'forecast wind direction',
-                20: 'forecast temperature',
-                21: 'forecast specific humidity',
-                22: 'active fire'}
+
+        # Features before any processing
+        base_feature_names = [
+            'VIIRS band M11',
+            'VIIRS band I2',
+            'VIIRS band I1',
+            'NDVI',
+            'EVI2',
+            'Total precipitation',
+            'Wind speed',
+            'Wind direction',
+            'Minimum temperature',
+            'Maximum temperature',
+            'Energy release component',
+            'Specific humidity',
+            'Slope',
+            'Aspect',
+            'Elevation',
+            'Palmer drought severity index (PDSI)',
+            'Landcover class',
+            'Forecast: Total precipitation',
+            'Forecast: Wind speed',
+            'Forecast: Wind direction',
+            'Forecast: Temperature',
+            'Forecast: Specific humidity',
+            'Active fire']
+
+        # Different land cover classes of feature "Landcover class"
+        land_cover_classes = [
+            'Land cover: Evergreen Needleleaf Forests',
+            'Land cover: Evergreen Broadleaf Forests',
+            'Land cover: Deciduous Needleleaf Forests',
+            'Land cover: Deciduous Broadleaf Forests',
+            'Land cover: Mixed Forests',
+            'Land cover: Closed Shrublands',
+            'Land cover: Open Shrublands',
+            'Land cover: Woody Savannas',
+            'Land cover: Savannas',
+            'Land cover: Grasslands',
+            'Land cover: Permanent Wetlands',
+            'Land cover: Croplands',
+            'Land cover: Urban and Built-up Lands',
+            'Land cover: Cropland/Natural Vegetation Mosaics',
+            'Land cover: Permanent Snow and Ice',
+            'Land cover: Barren',
+            'Land cover: Water Bodies']
+        
+        if only_base:
+            # Features as in the GeoTIFF files: land cover class not expanded, no binary active fire
+            return_features = base_feature_names
+        else:
+            # Features as used by most experiments
+            return_features = base_feature_names[:16] + land_cover_classes + base_feature_names[17:] + ["Active fire (binary)"]
+
+        return dict(enumerate(return_features))
 
     def get_generator_for_hdf5(self):
         """_summary_ Creates a generator that is used to turn the dataset into HDF5 files. It applies a few 
