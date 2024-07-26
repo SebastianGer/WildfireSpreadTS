@@ -32,9 +32,9 @@ parameters:
       - 11
   data.features_to_keep:
     values:
-      - [0, 1, 2, 3, 4, 38, 39] # Vegetation
-      - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 38, 39] # Vegetation, Topography, Land cover, Weather
-      - None  # All features
+      - [0, 1, 2, 3, 4, 38, 39] # Vegetation + Active Fire
+      - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 38, 39] # Multi: Vegetation, Landcover, Topography, Weather, Active fire
+      - None # All features
   data.n_leading_observations:
     value: 5
   data.batch_size:
